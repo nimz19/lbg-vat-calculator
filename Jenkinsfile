@@ -3,20 +3,20 @@ pipeline {
 
   stages {
     stage('Checkout') {
-        steps {
-          // Get some code from a GitHub repository
-          git branch: 'main', url: 'https://github.com/nimz19/lbg-vat-calculator.git'
-        }
+      steps {
+        // Get some code from a GitHub repository
+        git branch: 'main', url: 'https://github.com/nimz19/lbg-vat-calculator.git'
+      }
     }
     stage('SonarQube Analysis') {
       environment {
         scannerHome = tool 'sonarqube'
       }
-        steps {
-            withSonarQubeEnv('sonar-qube-13') {        
-              sh "${scannerHome}/bin/sonar-scanner"
-            }   
+      steps {
+        withSonarQubeEnv('sonar-qube-13') {
+          sh "${scannerHome}/bin/sonar-scanner"
         }
+      }
     }
   }
 }
